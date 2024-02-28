@@ -21,6 +21,52 @@ public class Village {
 	public void setChef(Chef chef) {
 		this.chef = chef;
 	}
+	
+	private  static class Marche {
+		private Etal [] etals ;
+		private int nbEtals ;
+
+		private Marche(Etal[] etals, int nbEtals) {
+			super();
+			this.etals = new Etal[nbEtals];
+			this.nbEtals = nbEtals;
+		}
+		private void utiliserEtal(int indiceEtal, Gaulois vendeur,
+				String produit, int nbProduit) {
+			etals[indiceEtal].occuperEtal(vendeur, produit, nbProduit);
+		}
+		private int trouverEtalLibre() {
+			for (int i = 0; i < etals.length ; i++) {
+				if (etals[i] == null) {
+					return i;
+				}
+			}
+			return -1;
+		}
+		private Etal[] trouverEtals(String produit) {
+			int nbEtalsProduit = 0 , j = 0; 
+			for (Etal etal: etals) {
+				if (etal.contientProduit(produit)) {
+					nbEtalsProduit ++;
+				}
+			} 
+			Etal[] etalsProduit = new Etal[nbEtalsProduit];
+			for (int i = 0; i < nbEtals; i++) {
+				if (etals[i].contientProduit(produit)) {
+					etalsProduit[j] = etals[i];
+				}
+			}
+			return etalsProduit;
+		}
+		Etal trouverVendeur(Gaulois gaulois) {
+			for (Etal etal : etals) {
+				if (etal.getVendeur() == gaulois) {
+					return etal;
+				}
+			}
+			return null;
+	}
+	}
 
 	public void ajouterHabitant(Gaulois gaulois) {
 		if (nbVillageois < villageois.length) {
@@ -56,4 +102,5 @@ public class Village {
 		}
 		return chaine.toString();
 	}
-}
+
+	}
