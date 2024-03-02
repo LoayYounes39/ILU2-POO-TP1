@@ -33,6 +33,7 @@ public class Village {
 			etals = new Etal[nbEtals];
 			this.nbEtalsMax = nbEtals;
 		}
+	
 		private void utiliserEtal(int indiceEtal, Gaulois vendeur,
 				String produit, int nbProduit) {
 			etals[indiceEtal] = new Etal();
